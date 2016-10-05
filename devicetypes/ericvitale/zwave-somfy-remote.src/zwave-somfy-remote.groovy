@@ -25,7 +25,7 @@ metadata {
 		capability "Configuration"
 		capability "Sensor"
         
-		attribute "numButtons", "STRING"
+		attribute "numberOfButtons", "string"
         attribute "buttonOneLastActivity", "string"
         attribute "buttonTwoLastActivity", "string"
         
@@ -71,7 +71,7 @@ def updated() {
 
 def initialization() {
 	log("Log level selected = ${logging}.", "INFO")
-    createEvent(name: "numButtons", value: "2", source: "DEVICE") 
+    createEvent(name: "numberOfButtons", value: "2", source: "DEVICE") 
 }
 
 def buttonEvent(buttonNumber, buttonAction) {
