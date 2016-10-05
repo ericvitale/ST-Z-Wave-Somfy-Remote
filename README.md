@@ -25,7 +25,6 @@ This SmartThings device handler is meant to be used with the Somfy remote that i
 7. Click the "Publish" button next to it and select "For Me". You have now self-published your Device Handler.
 
 ## Pairing the Device
-This device is a bit interesting to get it to pair. I've seen a few scenarios happen. Here is what I generally do:
 1. Run the device exclusion process in SmartThings, do this even if you have never paired this with SmartThings.
 2. Press and hold the reset button on the back of the device with a pin until the light on the front of the device begins to flash. Wait for SmartThings to confirm the device in excluded.
 3. Run the device discovery process within SmartThings
