@@ -1,6 +1,7 @@
 /**
  *  Z-Wave Somfy Remote
  *
+ *  Verison 1.0.1 - Fix: Updated attribute numberOfButtons from a String to Number (10/17/2016)
  *  Version 1.0.0 - Initial Release (10/5/2016)
  *
  *  Copyright 2016 ericvitale@gmail.com
@@ -25,7 +26,8 @@ metadata {
 		capability "Configuration"
 		capability "Sensor"
         
-		attribute "numberOfButtons", "string"
+		attribute "numberOfButtons", "number"
+        attribute "numButtons", "string"
         attribute "buttonOneLastActivity", "string"
         attribute "buttonTwoLastActivity", "string"
         
@@ -54,8 +56,12 @@ metadata {
         	state "default", label: '${currentValue}'
         }
         
-        main "ButtonOne", "ButtonOneActivity", "ButtonTwo", "ButtonTwoActivity"
-        details "ButtonOne", "ButtonOneActivity", "ButtonTwo", "ButtonTwoActivity"
+        valueTile("NumberOfButtons", "device.numberOfButtons", width: 6, height: 2) {
+        	state "default", label: 'This remote has ${currentValue} buttons.'
+        }
+        
+        main "ButtonOne", "ButtonOneActivity", "ButtonTwo", "ButtonTwoActivity", "NumberOfButtons"
+        details "ButtonOne", "ButtonOneActivity", "ButtonTwo", "ButtonTwoActivity", "NumberOfButtons"
 	}
 }
 
@@ -71,7 +77,9 @@ def updated() {
 
 def initialization() {
 	log("Log level selected = ${logging}.", "INFO")
-    createEvent(name: "numberOfButtons", value: "2", source: "DEVICE") 
+    log("Number of Buttons = 2.", "INFO")
+    sendEvent(name: "numberOfButtons", value: 2)
+    sendEvent(name: "numButtons", value: "2")
 }
 
 def buttonEvent(buttonNumber, buttonAction) {
@@ -207,6 +215,6 @@ def log(data, type) {
     }
 }
 
-def dhVersion() { return "1.0.0" }
+def dhVersion() { return "1.0.1" }
 
 /************ End Logging Methods *********************************************************/
